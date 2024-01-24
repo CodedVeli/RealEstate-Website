@@ -6,39 +6,32 @@ function CreateListing() {
     const [geolocationEnabled, setGeolocationEnabled] = useState(true);
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
-    //   type: "rent",
       name: "",
       bedrooms: "",
       bathrooms: "",
-    //   parking: false,
-    //   furnished: false,
+
       address: "",
       offer: false,
-    //   regularPrice: "",
-    //   discountedPrice: "",
+  
     price: "",
       image: {},
       latitude: 0,
       longitude: 0,
     });
     const {
-        // type,
+        
         name,
         bedrooms,
         bathrooms,
-        // parking,
-        // furnished,
+        
         address,
         price,
-        // offer,
-        // regularPrice,
-        // discountedPrice,
+       
         image,
         latitude,
         longitude,
       } = formData;
 
-    //   const navigate = useNavigate();
 
       const postListing = async (listing) => {
         try {
@@ -60,11 +53,7 @@ function CreateListing() {
         e.preventDefault();
         setLoading(true);
     
-        // if (discountedPrice > regularPrice) {
-        //   toast.error("Discounted price cannot be higher than regular price");
-        //   setLoading(false);
-        //   return;
-        // }
+
     
         if (image.length > 6) {
           toast.error("Max 6 images allowed");
@@ -124,7 +113,6 @@ function CreateListing() {
           }));
         }
     
-        // Text/Booleans/Numbers
         if (!e.target.files) {
           setFormData((prevState) => ({
             ...prevState,
@@ -140,28 +128,7 @@ function CreateListing() {
     </header>
     <main>
       <form onSubmit={onSubmit}>
-        {/* <label className="font-medium text-2xl"> Sell / Rent</label> */}
-        {/* <div className=" flex flex-row p-6 ">
-          <button
-            type="button"
-            className={type === "sale" ? " bg-green-600 " : "bg-slate-500"}
-            id="type"
-            value="sale"
-            onClick={onMutate}
-          >
-            Sell
-          </button>
-          <button
-            type="button"
-            className={type === "rent" ? " bg-green-600" : "bg-slate-500"}
-            id="type"
-            value="rent"
-            onClick={onMutate}
-          >
-            {" "}
-            Rent
-          </button>
-        </div> */}
+      
         <label className=" text-2xl font-medium flex p-4">Name</label>
         <input
           className=" p-5 bg-white rounded-lg border border-gray-400 outline-none focus:border-green-500"
@@ -201,56 +168,8 @@ function CreateListing() {
             />
           </div>
         </div>
-        {/* <label className="formLabel">Parking spot</label>
-        <div className="formButtons">
-          <button
-            className={parking ? "formButtonActive" : "formButton"}
-            type="button"
-            id="parking"
-            value={true}
-            onClick={onMutate}
-            min="1"
-            max="50"
-          >
-            Yes
-          </button>
-          <button
-            className={
-              !parking && parking !== null ? "formButtonActive" : "formButton"
-            }
-            type="button"
-            id="parking"
-            value={false}
-            onClick={onMutate}
-          >
-            No
-          </button>
-        </div> */}
-        {/* <label className="formLabel">Furnished</label>
-        <div className="formButtons">
-          <button
-            className={furnished ? "formButtonActive" : "formButton"}
-            type="button"
-            id="furnished"
-            value={true}
-            onClick={onMutate}
-          >
-            Yes
-          </button>
-          <button
-            className={
-              !furnished && furnished !== null
-                ? "formButtonActive"
-                : "formButton"
-            }
-            type="button"
-            id="furnished"
-            value={false}
-            onClick={onMutate}
-          >
-            No
-          </button>
-        </div> */}
+       
+      
        <div className=" pt-5 flex flex-col">
        <label className="text-2xl font-medium  p-4">Address</label>
         <textarea
@@ -262,55 +181,9 @@ function CreateListing() {
           required
         />
        </div>
-        {/* {!geolocationEnabled && (
-          <div className="formLatLng flex">
-            <div>
-              <label className="formLabel">Latitude</label>
-              <input
-                className="formInputSmall"
-                type="number"
-                id="latitude"
-                value={latitude}
-                onChange={onMutate}
-                required
-              />
-            </div>
-            <div>
-              <label className="formLabel">Longitude</label>
-              <input
-                className="formInputSmall"
-                type="number"
-                id="longitude"
-                value={longitude}
-                onChange={onMutate}
-                required
-              />
-            </div>
-          </div>
-        )} */}
-        {/* <label className="formLabel">Offer</label> */}
-        {/* <div className="formButtons">
-          <button
-            className={offer ? "formButtonActive" : "formButton"}
-            type="button"
-            id="offer"
-            value={true}
-            onClick={onMutate}
-          >
-            Yes
-          </button>
-          <button
-            className={
-              !offer && offer !== null ? "formButtonActive" : "formButton"
-            }
-            type="button"
-            id="offer"
-            value={false}
-            onClick={onMutate}
-          >
-            No
-          </button>
-        </div> */}
+        
+       
+      
         <label className="text-2xl font-medium mb-5  p-4"> Price</label>
         <div className="formPriceDiv">
           <input
@@ -323,24 +196,9 @@ function CreateListing() {
             max="750000"
             required
           />
-          {/* {type === "rent" && <p className="formPriceText">$ / Month</p>} */}
         </div>
 
-        {/* {offer && (
-          <>
-            <label className="formLabel">Discounted Price</label>
-            <input
-              className="formInputSmall"
-              type="number"
-              id="discountedPrice"
-              value={discountedPrice}
-              onChange={onMutate}
-              min="50"
-              max="750000000"
-              required={offer}
-            />
-          </>
-        )} */}
+      
         <div className=" mt-5 flex flex-col">
         <label className="text-2xl font-medium mt-4">Images</label>
         <p className="  mt-4 text-xl">
