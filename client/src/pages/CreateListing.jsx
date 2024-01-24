@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import  { API_SECRETKEY} from '../../data'
 function CreateListing() {
     const [geolocationEnabled, setGeolocationEnabled] = useState(true);
     const [loading, setLoading] = useState(false);
@@ -82,7 +83,7 @@ function CreateListing() {
               headers: {
                 "x-rapidapi-host": "forward-reverse-geocoding.p.rapidapi.com",
                 "x-rapidapi-key":
-                  "8535e6324bmsh9b09f29b4c1e1efp1de9efjsn3dab3bfce019",
+                  `${API_SECRETKEY}`,
               },
             }
           );
