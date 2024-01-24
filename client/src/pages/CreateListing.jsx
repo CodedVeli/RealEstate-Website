@@ -33,17 +33,19 @@ function CreateListing() {
       } = formData;
 
 
-      const postListing = async (listing) => {
+      const postListing = async (newFormData) => {
         try {
-            const response = await fetch("/api/listings", {
+            const response = await fetch(" http://localhost:3000/houses", {
                 method: "POST",
                 headers: {
+                  "Content-Type": "application/json",
                     Accept: "application/json",
                 },
-                body: listing,
+                body: JSON.stringify(newFormData),
 
             });
             return await response.json();
+
         } catch (err) {
             console.log(err);
         }
@@ -94,32 +96,56 @@ function CreateListing() {
       geolocation.lng = longitude;
       location = address;
     }
+
+ 
+    const newFormData = {
+      ...formData,
+      geolocation: {
+        lat: geolocation.lat,
+        lng: geolocation.lng,
+      },
+    };
+  
+    try {
+      const result = await postListing(newFormData);
+      console.log(result);
+      toast.success("Listing created successfully");
+      if (result.error) {
+        toast.error(result.error);
+        setLoading(false);
+        return;
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  
     };
 
     const onMutate = (e) => {
-        let boolean = null;
-        if (e.target.value === "true") {
+      let boolean = null;
+  
+      if (e.target.value === "true") {
           boolean = true;
-        }
-        if (e.target.value === "false") {
+      } else if (e.target.value === "false") {
           boolean = false;
-        }
-    
-        // Files
-        if (e.target.files) {
+      }
+  
+      // Files
+      if (e.target.files) {
           setFormData((prevState) => ({
-            ...prevState,
-            image: e.target.files,
+              ...prevState,
+              image: e.target.files,
           }));
-        }
-    
-        if (!e.target.files) {
+      } else {
           setFormData((prevState) => ({
-            ...prevState,
-            [e.target.id]: boolean ?? e.target.value,
+              ...prevState,
+              [e.target.id]: e.target.id === "price" ? parseFloat(e.target.value) : boolean ?? e.target.value,
           }));
-        }
-      };
+      }
+  };
+  
     
   return (
     <div className=" ml-20 gap-5 mt-40">
@@ -180,6 +206,32 @@ function CreateListing() {
           onChange={onMutate}
           required
         />
+              {!geolocationEnabled && (
+            <div className="formLatLng flex">
+              <div>
+                <label className="formLabel">Latitude</label>
+                <input
+                  className="formInputSmall"
+                  type="number"
+                  id="latitude"
+                  value={latitude}
+                  onChange={onMutate}
+                  required
+                />
+              </div>
+              <div>
+                <label className="formLabel">Longitude</label>
+                <input
+                  className="formInputSmall"
+                  type="number"
+                  id="longitude"
+                  value={longitude}
+                  onChange={onMutate}
+                  required
+                />
+              </div>
+            </div>
+          )}
        </div>
         
        
@@ -189,7 +241,7 @@ function CreateListing() {
           <input
             className="p-4 bg-white rounded-lg border border-gray-400 outline-none focus:border-green-500"
             type="number"
-            id="regularPrice"
+            id="price"
             value={price}
             onChange={onMutate}
             min="50"
