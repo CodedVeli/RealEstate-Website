@@ -1,0 +1,99 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.aboutimage .image {
+  width: 100%;
+  height: 500px;
+  background-position: center;
+  background-size: cover;
+}
+.abouttext {
+  margin-top: -350px;
+  position: absolute;
+  text-align: center;
+  font-size: 60px;
+  font-family: bold;
+  margin-left: 550px;
+}
+.about1 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.about1 .first {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 30px;
+}
+.about1 .sec {
+  display: flex;
+  justify-content: space-around;
+}
+.cardimage {
+  margin-top: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2);
+  margin-bottom: 50px;
+}
+.name {
+  display: flex;
+}
+.em {
+  display: flex;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.phone {
+  margin-left: 20px;
+}
+.lastname {
+  margin-left: 20px;
+}
+.form {
+  margin-left: -200px;
+}
+.button1 {
+  border: none;
+  background-color: orangered;
+  padding: 8px;
+  width: 100%;
+}
+input {
+  padding: 5px;
+}
+.footer {
+  background-color: orangered;
+  color: white;
+  display: flex;
+  justify-content: space-around;
+}
+.ic {
+  display: flex;
+}
+.image .lastimage {
+  width: 500px;
+  height: 400px;
+}
+.about1 {
+  margin-top: 50px;
+}
+.about1 h1 {
+  font-weight: bold;
+  font-size: 30px;
+}
+.formimage h1 {
+  font-weight: bold;
+  font-size: 25px;
+  margin-bottom: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.form input {
+  border: none;
+  padding: 6px;
+  border-top: transparent;
+  background: transparent;
+  border-bottom: 2px solid #000;
+}
