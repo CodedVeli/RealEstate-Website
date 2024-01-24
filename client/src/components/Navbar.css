@@ -1,0 +1,42 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+img {
+  width: 100px;
+  height: 100px;
+}
+
+.home a {
+  padding: 10px;
+  font-size: 20px;
+  color: black;
+  font-weight: bold;
+  text-decoration: none;
+}
+.login a {
+  font-size: 20px;
+  padding: 8px;
+  padding-right: 20px;
+  padding-left: 20px;
+}
+.signup {
+  background-color: orangered;
+  color: #fff;
+  border-radius: 10px;
+  text-decoration: none;
+}
+.log-in {
+  margin-left: 20px;
+  background-color: orangered;
+  color: #fff;
+  border-radius: 10px;
+  text-decoration: none;
+  margin-right: 10px;
+}
