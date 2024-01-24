@@ -28,4 +28,4 @@ class Property(db.Model):
     address = db.Column(db.String(255), nullable=False)
     latitude = db.Column(db.Float, nullable=False)
     longitude = db.Column(db.Float, nullable=False)
-    image = db.Column(db.Text)
+    image = db.Column(db.String(255), nullable=False)
