@@ -11,10 +11,11 @@ class Base(db.Model):
     password = db.Column(db.String(255), nullable=False)
 
 class User(Base):
-    # role = db.Column(db.String(50), default='user')
+    role = db.Column(db.String(50), default='user')
     properties = db.relationship('Property', backref='user', lazy=True)
 
 class Owner(Base):
+    role = db.Column(db.String(50), default='owner')
     properties = db.relationship('Property', backref='owner', lazy=True)
 
 class Property(db.Model):

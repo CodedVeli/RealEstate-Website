@@ -44,7 +44,7 @@ def signup():
     db.session.add(new_user)
     db.session.commit()
  
-    session["user_id"] = new_user.id
+    # session["user_id"] = new_user.id
     s = URLSafeTimedSerializer(app.config['SECRET_KEY'])
     token = s.dumps(new_user.email, salt='email-confirm')
  
@@ -70,11 +70,15 @@ def login_user():
     if not bcrypt.check_password_hash(user.password, password):
         return jsonify({"error": "Unauthorized"}), 401
       
-    session["user_id"] = user.id
+    # session["user_id"] = user.id
+    s = URLSafeTimedSerializer(app.config['SECRET_KEY'])
+    token = s.dumps(user.email, salt='email-confirm')
+
   
     return jsonify({
         "id": user.id,
-        "email": user.email
+        "email": user.email,
+        "token" : token      
     })
 
 class Logout(Resource):
