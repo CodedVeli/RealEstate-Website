@@ -4,6 +4,7 @@ from flask_bcrypt import Bcrypt
 from flask_cors import CORS, cross_origin
 from flask_restful import Api, Resource, reqparse 
 from models import db, User, Property
+from authentication import token_required
  
 app = Flask(__name__)
  
@@ -32,6 +33,7 @@ def signup():
     name = request.json["name"]
     email = request.json["email"]
     password = request.json["password"]
+    role = request.json.get("role", "user")
  
     user_exists = User.query.filter_by(email=email).first() is not None
 
@@ -40,18 +42,15 @@ def signup():
         return jsonify({"error": "Email already exists"}), 409
      
     hashed_password = bcrypt.generate_password_hash(password)
-    new_user = User(name=name,email=email, password=hashed_password)
+    new_user = User(name=name,email=email, password=hashed_password, role=role)
     db.session.add(new_user)
     db.session.commit()
  
-    # session["user_id"] = new_user.id
-    s = URLSafeTimedSerializer(app.config['SECRET_KEY'])
-    token = s.dumps(new_user.email, salt='email-confirm')
- 
+
     return jsonify({
         "id": new_user.id,
         "email": new_user.email,
-        "token" : token
+        "role": new_user.role,
     })
 
 
@@ -70,20 +69,25 @@ def login_user():
     if not bcrypt.check_password_hash(user.password, password):
         return jsonify({"error": "Unauthorized"}), 401
       
-    # session["user_id"] = user.id
+    user_role = user.role
     s = URLSafeTimedSerializer(app.config['SECRET_KEY'])
     token = s.dumps(user.email, salt='email-confirm')
+    
+    session["token"] = token
 
   
     return jsonify({
         "id": user.id,
         "email": user.email,
-        "token" : token      
+        "token" : token,
+        "role": user_role 
+
     })
+
 
 class Logout(Resource):
     def delete(self):
-        session['user_id'] = None
+        session.pop("token", None)
         return jsonify({'message': '204: No Content'}), 204
  
 class PropertyResource(Resource):
@@ -151,6 +155,20 @@ class PropertyResource(Resource):
             return {'message': 'Property deleted successfully'}
         else:
             return {'message': 'Property not found'}, 404
+        
+@app.route('/protected_route')
+@token_required
+def protected_route():
+    token = session.get("token")
+
+    s = URLSafeTimedSerializer(app.config['SECRET_KEY'])
+    try:
+        email = s.loads(token, salt='email-confirm', max_age=3600)
+    except:
+        return jsonify({'message': 'Token is invalid!'}), 401
+
+    return jsonify({'message': 'This is a protected route!'})
+
         
 api.add_resource(PropertyResource, '/properties', '/properties/<int:property_id>')
 api.add_resource(Logout, '/logout')

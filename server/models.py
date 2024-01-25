@@ -22,6 +22,7 @@ class Property(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     owner_id = db.Column(db.Integer, db.ForeignKey('owner.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     bedrooms = db.Column(db.Integer, nullable=False)
     bathrooms = db.Column(db.Integer, nullable=False)
     price = db.Column(db.Float, nullable=False)
