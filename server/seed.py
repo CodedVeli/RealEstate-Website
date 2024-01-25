@@ -45,7 +45,7 @@ with app.app_context():
             user_id=owners[i].id,  
             bedrooms=randint(1, 5),
             bathrooms=randint(1, 3),
-            regular_price=randint(1000, 5000),
+            price=randint(1000, 5000),
             location=fake.address(),
             longitude=fake.longitude(),
             latitude=fake.latitude(),

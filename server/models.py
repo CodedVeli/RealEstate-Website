@@ -27,7 +27,7 @@ class Property(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id', name='property_user_fk'), nullable=False)
     bedrooms = db.Column(db.Integer, nullable=False)
     bathrooms = db.Column(db.Integer, nullable=False)
-    regular_price = db.Column(db.Float, nullable=False)
+    price = db.Column(db.Float, nullable=False)
     location = db.Column(db.String(255), nullable=False)
     latitude = db.Column(db.Float, nullable=False)
     longitude = db.Column(db.Float, nullable=False)
