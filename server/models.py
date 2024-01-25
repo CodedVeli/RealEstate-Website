@@ -29,4 +29,20 @@ class Property(db.Model):
     bathrooms = db.Column(db.Integer, nullable=False)
     regular_price = db.Column(db.Float, nullable=False)
     location = db.Column(db.String(255), nullable=False)
+    latitude = db.Column(db.Float, nullable=False)
+    longitude = db.Column(db.Float, nullable=False)
     image = db.Column(db.String(255), nullable=False)
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'user_id': self.user_id,
+            'bedrooms': self.bedrooms,
+            'bathrooms': self.bathrooms,
+            'regular_price': self.regular_price,
+            'location': self.location,
+            'latitude': self.latitude,
+            'longitude': self.longitude,
+            'image': self.image,
+        }

@@ -47,6 +47,8 @@ with app.app_context():
             bathrooms=randint(1, 3),
             regular_price=randint(1000, 5000),
             location=fake.address(),
+            longitude=fake.longitude(),
+            latitude=fake.latitude(),
             image=fake.word()
         )
         properties.append(property_instance)
