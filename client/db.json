@@ -724,6 +724,24 @@
         "lng": "39.6695213"
       },
       "id": 44
+    },
+    {
+      "name": "kehjdjdjdkjdhvda",
+      "bedrooms": "7",
+      "bathrooms": "8",
+      "address": "meru",
+      "offer": false,
+      "price": 80000,
+      "image": [
+        "https://res.cloudinary.com/dufdnc0ie/image/upload/v1706166633/event1_xluwlu.jpg"
+      ],
+      "latitude": 0,
+      "longitude": 0,
+      "geolocation": {
+        "lat": "49.2320541",
+        "lng": "2.1323991"
+      },
+      "id": 45
     }
   ]
 }
