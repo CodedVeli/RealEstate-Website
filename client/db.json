@@ -589,6 +589,141 @@
         "lng": "2.1323991"
       },
       "id": 37
+    },
+    {
+      "name": "kejayangukali",
+      "bedrooms": "7",
+      "bathrooms": "6",
+      "address": "meru",
+      "offer": false,
+      "price": 70000,
+      "image": [
+        "https://res.cloudinary.com/dufdnc0ie/image/upload/v1706127336/buru_duo2jz.png",
+        "https://res.cloudinary.com/dufdnc0ie/image/upload/v1706127337/CodedVeli_langs_rqjxsr.png",
+        "https://res.cloudinary.com/dufdnc0ie/image/upload/v1706127338/CodedVeli_langs_1_ph0f6w.png"
+      ],
+      "latitude": 0,
+      "longitude": 0,
+      "geolocation": {
+        "lat": "49.2320541",
+        "lng": "2.1323991"
+      },
+      "id": 38
+    },
+    {
+      "name": "kejayangukali",
+      "bedrooms": "7",
+      "bathrooms": "6",
+      "address": "meru",
+      "offer": false,
+      "price": 70000,
+      "image": [
+        "https://res.cloudinary.com/dufdnc0ie/image/upload/v1706127348/buru_ijdpnr.png",
+        "https://res.cloudinary.com/dufdnc0ie/image/upload/v1706127349/CodedVeli_langs_mt1yn7.png",
+        "https://res.cloudinary.com/dufdnc0ie/image/upload/v1706127350/CodedVeli_langs_1_jdfxut.png"
+      ],
+      "latitude": 0,
+      "longitude": 0,
+      "geolocation": {
+        "lat": "49.2320541",
+        "lng": "2.1323991"
+      },
+      "id": 39
+    },
+    {
+      "name": "kejayangukali",
+      "bedrooms": "6",
+      "bathrooms": "5",
+      "address": "nairobi",
+      "offer": false,
+      "price": 60000,
+      "image": [
+        "https://res.cloudinary.com/dufdnc0ie/image/upload/v1706128004/img2_kxqrgu.jpg",
+        "https://res.cloudinary.com/dufdnc0ie/image/upload/v1706128006/img3_xom6k2.jpg",
+        "https://res.cloudinary.com/dufdnc0ie/image/upload/v1706128007/img4_zwcdvf.jpg"
+      ],
+      "latitude": 0,
+      "longitude": 0,
+      "geolocation": {
+        "lat": "-1.2596661",
+        "lng": "36.7758057"
+      },
+      "id": 40
+    },
+    {
+      "name": "nameeeeeujjjj",
+      "bedrooms": "7",
+      "bathrooms": "6",
+      "address": "mombasa",
+      "offer": false,
+      "price": 700000,
+      "image": [
+        "https://res.cloudinary.com/dufdnc0ie/image/upload/v1706128173/lunges_zqabod.png",
+        "https://res.cloudinary.com/dufdnc0ie/image/upload/v1706128174/lunges_2_sw9dva.png"
+      ],
+      "latitude": 0,
+      "longitude": 0,
+      "geolocation": {
+        "lat": "-4.0774169",
+        "lng": "39.6695213"
+      },
+      "id": 41
+    },
+    {
+      "name": "fchhjvjjjvdkjvdkjv",
+      "bedrooms": "7",
+      "bathrooms": "8",
+      "address": "mombasa",
+      "offer": false,
+      "price": 700000,
+      "image": [
+        "https://res.cloudinary.com/dufdnc0ie/image/upload/v1706128373/boyz_r91vnz.jpg",
+        "https://res.cloudinary.com/dufdnc0ie/image/upload/v1706128375/buru_uhjopb.png",
+        "https://res.cloudinary.com/dufdnc0ie/image/upload/v1706128376/CodedVeli_langs_wht41a.png"
+      ],
+      "latitude": 0,
+      "longitude": 0,
+      "geolocation": {
+        "lat": "-4.0774169",
+        "lng": "39.6695213"
+      },
+      "id": 42
+    },
+    {
+      "name": "kjfjjvdkjvkjvdkjvd",
+      "bedrooms": "8",
+      "bathrooms": "8",
+      "address": "mombasa",
+      "offer": false,
+      "price": 90000,
+      "image": [
+        "https://res.cloudinary.com/dufdnc0ie/image/upload/v1706128475/lunges_1_a1ac2i.png"
+      ],
+      "latitude": 0,
+      "longitude": 0,
+      "geolocation": {
+        "lat": "-4.0774169",
+        "lng": "39.6695213"
+      },
+      "id": 43
+    },
+    {
+      "name": "myappjjhhhhh",
+      "bedrooms": "8",
+      "bathrooms": "6",
+      "address": "mombasa",
+      "offer": false,
+      "price": 70000,
+      "image": [
+        "https://res.cloudinary.com/dufdnc0ie/image/upload/v1706128613/sc_x5sxep.jpg"
+      ],
+      "latitude": 0,
+      "longitude": 0,
+      "geolocation": {
+        "lat": "-4.0774169",
+        "lng": "39.6695213"
+      },
+      "id": 44
     }
   ]
 }
