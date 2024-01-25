@@ -184,7 +184,7 @@ function CreateListing() {
       
         <label className=" text-2xl font-medium flex p-4">Name</label>
         <input
-          className=" p-5 bg-white rounded-lg border border-gray-400 outline-none focus:border-green-500"
+          className=" p-5 bg-white w-[300px] rounded-lg border border-gray-400 outline-none focus:border-green-500"
           type="text"
           id="name"
           value={name}

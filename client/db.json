@@ -742,6 +742,25 @@
         "lng": "2.1323991"
       },
       "id": 45
+    },
+    {
+      "name": "condo mansionette",
+      "bedrooms": "5",
+      "bathrooms": "8",
+      "address": "nairobi",
+      "offer": false,
+      "price": 70000,
+      "image": [
+        "https://res.cloudinary.com/dufdnc0ie/image/upload/v1706192834/img2_ekfh70.jpg",
+        "https://res.cloudinary.com/dufdnc0ie/image/upload/v1706192836/img3_n7y39k.jpg"
+      ],
+      "latitude": 0,
+      "longitude": 0,
+      "geolocation": {
+        "lat": "-1.2596661",
+        "lng": "36.7758057"
+      },
+      "id": 46
     }
   ]
 }
