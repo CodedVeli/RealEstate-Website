@@ -24,7 +24,7 @@ db.init_app(app)
 with app.app_context():
     db.create_all()
  
-@app.route("/")
+@app.route("/home")
 def hello_world():
     return "Hello, World!"
  
