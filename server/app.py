@@ -73,35 +73,39 @@ def signup():
 
 
  
+
 @app.route("/login", methods=["POST"])
 def login_user():
-    email = request.json["email"]
-    password = request.json["password"]
-    
-    user_role = "owner"
+    email = request.json.get("email")
+    password = request.json.get("password")
+    role = request.json.get("role", "user")
 
-    if user_role == "user":
+     
+
+    if role == "user":
         user = User.query.filter_by(email=email).first()
-    else:
+    elif role == "owner":
         user = Owner.query.filter_by(email=email).first()
-  
+    else:
+        return jsonify({"error": "Invalid user role"}), 401
+
     if user is None:
         return jsonify({"error": "Unauthorized Access"}), 401
-  
-    user_role = user.role
+
     if not bcrypt.check_password_hash(user.password, password):
         return jsonify({"error": "Unauthorized"}), 401
-      
+
     s = URLSafeTimedSerializer(app.config['SECRET_KEY'])
     token = s.dumps(user.email, salt='email-confirm')
-    
+
     session["token"] = token
 
     return jsonify({
         "id": user.id,
         "email": user.email,
-        "token" : token,
-        "role": user_role 
+        "name": user.name,
+        "token": token,
+        "role": role
     })
 
 
@@ -179,7 +183,7 @@ class PropertyResource(Resource):
 @app.route('/protected_route')
 @token_required
 def protected_route():
-    token = session.get("token")
+    token = session.get("token") or request.headers.get('x-access-token')
 
     s = URLSafeTimedSerializer(app.config['SECRET_KEY'])
     try:

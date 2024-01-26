@@ -21,7 +21,6 @@ function CreateListing() {
       latitude: 0,
       longitude: 0,
     });
-    // # CORS(app, supports_credentials=True, allow_headers=["Content-Type", "Authorization"])
 
     const {
         

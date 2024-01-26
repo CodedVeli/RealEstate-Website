@@ -11,7 +11,7 @@ function LogIn() {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
-    role: "",
+    role:""
   });
   const navigate = useNavigate();
 
@@ -25,13 +25,16 @@ function LogIn() {
         formData
       );
       console.log(response);
+      localStorage.setItem("data", JSON.stringify(response.data));
+      console.log(response.data);
       toast.success("User logged in successfully");
       navigate("/profile");
     } catch (err) {
       toast.error("Error logging in");
-      console.log(err);
+      console.error("Error logging in:", err);
     }
   };
+
 
   const onMutate = (e) => {
     setFormData((prevState) => ({
@@ -74,6 +77,7 @@ function LogIn() {
             <div className="form-group">
               <label htmlFor="role">Role</label> <br />
               <select id="role" name="role" onChange={onMutate} value={role}>
+              <option value="">Select Role</option>
                 <option value="user">User</option>
                 <option value="owner">Owner</option>
               </select>

@@ -109,6 +109,7 @@ function SignUp() {
             <div className="form-group">
               <label htmlFor="role">Role</label> <br />
               <select id="role" name="role" onChange={onMutate} value={role}>
+                <option value="">Select Role</option>
                 <option value="user">User</option>
                 <option value="owner">Owner</option>
               </select>
