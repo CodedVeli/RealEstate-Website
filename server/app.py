@@ -3,7 +3,7 @@ from itsdangerous import URLSafeTimedSerializer
 from flask_bcrypt import Bcrypt 
 from flask_cors import CORS, cross_origin
 from flask_restful import Api, Resource, reqparse 
-from models import db, User, Property
+from models import db, User, Property, Owner
 from authentication import token_required
  
 app = Flask(__name__)
@@ -16,6 +16,7 @@ SQLALCHEMY_ECHO = True
   
 bcrypt = Bcrypt(app) 
 CORS(app, supports_credentials=True)
+# CORS(app, supports_credentials=True, allow_headers=["Content-Type", "Authorization"])
 
 
 api = Api(app)
@@ -36,15 +37,31 @@ def signup():
     role = request.json.get("role", "user")
  
     user_exists = User.query.filter_by(email=email).first() is not None
+    existing_owner = Owner.query.filter_by(email=email).first()
+
+    if existing_owner:
+        return jsonify({"error": "Email already exists for owner"}), 409
+
 
  
     if user_exists:
         return jsonify({"error": "Email already exists"}), 409
      
     hashed_password = bcrypt.generate_password_hash(password)
-    new_user = User(name=name,email=email, password=hashed_password, role=role)
-    db.session.add(new_user)
-    db.session.commit()
+    new_user = None
+    if role == "user":
+        new_user = User(name=name, email=email, password=hashed_password, role=role)
+        db.session.add(new_user)
+        db.session.commit()
+    elif role == "owner":
+        new_owner = Owner(name=name, email=email, password=hashed_password, role=role)
+        db.session.add(new_owner)
+        db.session.commit()
+
+    if new_user is None:
+        return jsonify({"error": "Invalid role provided"}), 400
+    
+
  
 
     return jsonify({
@@ -60,28 +77,31 @@ def signup():
 def login_user():
     email = request.json["email"]
     password = request.json["password"]
-  
-    user = User.query.filter_by(email=email).first()
+    
+    user_role = None
+
+    if user_role == "user":
+        user = User.query.filter_by(email=email).first()
+    elif user_role == "owner":
+        user = Owner.query.filter_by(email=email).first()
   
     if user is None:
         return jsonify({"error": "Unauthorized Access"}), 401
   
+    user_role = user.role
     if not bcrypt.check_password_hash(user.password, password):
         return jsonify({"error": "Unauthorized"}), 401
       
-    user_role = user.role
     s = URLSafeTimedSerializer(app.config['SECRET_KEY'])
     token = s.dumps(user.email, salt='email-confirm')
     
     session["token"] = token
 
-  
     return jsonify({
         "id": user.id,
         "email": user.email,
         "token" : token,
         "role": user_role 
-
     })
 
 

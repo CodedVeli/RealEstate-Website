@@ -1,7 +1,41 @@
-import React from "react";
+import  { useState } from "react";
+import {  useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import "./LogIn.css";
+import axios from 'axios'
 
 function LogIn() {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+  const navigate = useNavigate();
+
+  const { email, password } = formData;
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/login",
+        formData
+      );
+      console.log(response);
+      toast.success("User logged in successfully");
+      navigate("/profile");
+    } catch (err) {
+      toast.error("Error logging in");
+      console.log(err);
+    }
+  }   
+
+  const onMutate = (e) => {
+    setFormData((prevState) => ({
+        ...prevState,
+        [e.target.id]: e.target.value,
+    }));
+    }
+
   const loginimage =
     "https://images.unsplash.com/photo-1505843513577-22bb7d21e455?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
   return (
@@ -10,14 +44,14 @@ function LogIn() {
       <div className="signup1">
         <div className="signin-card">
           <h2>Log In</h2>
-          <form>
+          <form onSubmit={onSubmit}>
             <div className="form-group">
               <label htmlFor="email">Email</label> <br />
-              <input type="email" id="email" name="email" />
+              <input type="email" id="email" value={email} onChange={onMutate} name="email" />
             </div>
             <div className="form-group">
               <label htmlFor="password">Password</label> <br />
-              <input type="password" id="password" name="password" />
+              <input type="password" id="password" value={password} onChange={onMutate} name="password" />
             </div>
             <button type="submit" className="bt1">
               Log In
