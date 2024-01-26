@@ -2,6 +2,9 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "./SignUp.css";
+import { FaInstagram } from "react-icons/fa6";
+import { FaSquareXTwitter } from "react-icons/fa6";
+import { FaFacebook } from "react-icons/fa";
 
 function SignUp() {
   const navigate = useNavigate();
@@ -9,7 +12,7 @@ function SignUp() {
     name: "",
     email: "",
     password: "",
-    role: "", 
+    role: "",
   });
 
   const { name, email, password, role } = formData;
@@ -21,7 +24,7 @@ function SignUp() {
       name,
       email,
       password,
-      role,  
+      role,
     };
 
     try {
@@ -76,6 +79,7 @@ function SignUp() {
                 onChange={onMutate}
                 value={name}
                 name="name"
+                required
               />
             </div>
 
@@ -87,6 +91,7 @@ function SignUp() {
                 onChange={onMutate}
                 value={email}
                 name="email"
+                required
               />
             </div>
             <div className="form-group">
@@ -97,17 +102,13 @@ function SignUp() {
                 onChange={onMutate}
                 id="password"
                 name="password"
+                required
               />
             </div>
 
             <div className="form-group">
               <label htmlFor="role">Role</label> <br />
-              <select
-                id="role"
-                name="role"
-                onChange={onMutate}
-                value={role}
-              >
+              <select id="role" name="role" onChange={onMutate} value={role}>
                 <option value="user">User</option>
                 <option value="owner">Owner</option>
               </select>
@@ -123,6 +124,35 @@ function SignUp() {
               Log in
             </a>
           </p>
+        </div>
+      </div>
+      <div className="footer">
+        <div className="contact1">
+          <h1>Contact</h1>
+          <p>Westlands,Nairobi Kenya</p>
+          <p>P.O Box 20227 - 00100</p>
+          <p>Nairobi Kenya</p>
+          <p>+254700000000</p>
+        </div>
+        <div className="connect">
+          <h1>Connect</h1>
+          <div className="ic">
+            <h1>
+              <FaInstagram />
+            </h1>
+            <h1>
+              <FaSquareXTwitter />
+            </h1>
+            <h1>
+              <FaFacebook />
+            </h1>
+          </div>
+        </div>
+        <div className="explore">
+          <h1>Explore</h1>
+          <p>For Sale</p>
+          <p>For Rent</p>
+          <p>News</p>
         </div>
       </div>
     </div>
