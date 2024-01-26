@@ -54,8 +54,8 @@ def signup():
         db.session.add(new_user)
         db.session.commit()
     elif role == "owner":
-        new_owner = Owner(name=name, email=email, password=hashed_password, role=role)
-        db.session.add(new_owner)
+        new_user = Owner(name=name, email=email, password=hashed_password, role=role)
+        db.session.add(new_user)
         db.session.commit()
 
     if new_user is None:
@@ -78,11 +78,11 @@ def login_user():
     email = request.json["email"]
     password = request.json["password"]
     
-    user_role = None
+    user_role = "owner"
 
     if user_role == "user":
         user = User.query.filter_by(email=email).first()
-    elif user_role == "owner":
+    else:
         user = Owner.query.filter_by(email=email).first()
   
     if user is None:

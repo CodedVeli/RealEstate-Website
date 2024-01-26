@@ -11,10 +11,11 @@ function LogIn() {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
+    role: "",
   });
   const navigate = useNavigate();
 
-  const { email, password } = formData;
+  const { email, password, role } = formData;
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -69,6 +70,13 @@ function LogIn() {
                 name="password"
                 required
               />
+            </div>
+            <div className="form-group">
+              <label htmlFor="role">Role</label> <br />
+              <select id="role" name="role" onChange={onMutate} value={role}>
+                <option value="user">User</option>
+                <option value="owner">Owner</option>
+              </select>
             </div>
             <button type="submit" className="bt1">
               Log In
