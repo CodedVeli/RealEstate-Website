@@ -1,9 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-// import img1 from "../assets/img1.jpg";
-// import img2 from "../assets/img2.jpg";
-// import img3 from "../assets/img3.jpg";
-// import img4 from "../assets/img4.jpg";
 import PropertyList from "../pages/PropertyList";
 import Pagination from "./Pagination";
 
@@ -15,7 +11,7 @@ function HouseListing() {
   const [postsPerPage, setPostsPerPage] = useState(4);
 
   const fetchHouses = async () => {
-    const res = await fetch("http://localhost:3000/houses");
+    const res = await fetch("http://localhost:5000/properties");
     const data = await res.json();
     setHouses(data);
     console.log(data);

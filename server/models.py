@@ -29,4 +29,14 @@ class Property(db.Model):
     location = db.Column(db.String(255), nullable=False)
     latitude = db.Column(db.Float, nullable=False)
     longitude = db.Column(db.Float, nullable=False)
+    image = db.relationship('Image', backref='property', lazy=True)
+
+    def to_dict(self):
+        data = {c.name: getattr(self, c.name) for c in self.__table__.columns}
+        data['image'] = [image.image for image in self.image]
+        return data
+    
+class Image(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    property_id = db.Column(db.Integer, db.ForeignKey('property.id'), nullable=False)
     image = db.Column(db.String(255), nullable=False)

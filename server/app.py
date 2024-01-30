@@ -3,7 +3,7 @@ from itsdangerous import URLSafeTimedSerializer
 from flask_bcrypt import Bcrypt 
 from flask_cors import CORS, cross_origin
 from flask_restful import Api, Resource, reqparse 
-from models import db, User, Property, Owner
+from models import db, User, Property, Owner, Image
 from authentication import token_required
  
 app = Flask(__name__)
@@ -16,7 +16,6 @@ SQLALCHEMY_ECHO = True
   
 bcrypt = Bcrypt(app) 
 CORS(app, supports_credentials=True)
-# CORS(app, supports_credentials=True, allow_headers=["Content-Type", "Authorization"])
 
 
 api = Api(app)
@@ -106,6 +105,7 @@ def login_user():
         "name": user.name,
         "token": token,
         "role": role
+        
     })
 
 
@@ -115,20 +115,25 @@ class Logout(Resource):
         return jsonify({'message': '204: No Content'}), 204
  
 class PropertyResource(Resource):
-    def get(self, property_id=None):
+    def get(self, property_id=None, owner_id=None):
         if property_id:
             property_data = Property.query.filter_by(id=property_id).first()
             if property_data:
                 return property_data.to_dict()
             else:
                 return {'message': 'Property not found'}, 404
+        elif owner_id:
+            properties = Property.query.filter_by(owner_id=owner_id).all()
+            return [prop.to_dict() for prop in properties]    
         else:
             properties = Property.query.all()
-            return [prop.to_dict() for prop in properties]
+            return [prop.to_dict() for prop in properties] 
+
 
     def post(self):
         parser = reqparse.RequestParser()
         parser.add_argument('name', type=str, required=True)
+        parser.add_argument('owner_id', type=int, required=True)
         parser.add_argument('user_id', type=int, required=True)
         parser.add_argument('bedrooms', type=int, required=True)
         parser.add_argument('bathrooms', type=int, required=True)
@@ -136,14 +141,25 @@ class PropertyResource(Resource):
         parser.add_argument('location', type=str, required=True)
         parser.add_argument('latitude', type=float, required=True)
         parser.add_argument('longitude', type=float, required=True)
-        parser.add_argument('image', type=str, required=True)
+        parser.add_argument('image', type=list, location='json', required=True)
         
         args = parser.parse_args()
+
+        images = [Image(image=url) for url in args.pop('image')]
+        
+
         
         new_property = Property(**args)
+        new_property.images = images 
         
         db.session.add(new_property)
         db.session.commit()
+        
+        
+        for image in images:
+            new_image = Image(property_id=new_property.id, image=image.image)
+            db.session.add(new_image)
+            db.session.commit()
         return {'message': 'Property created successfully'}, 201
     
     def patch(self, property_id):
@@ -151,7 +167,7 @@ class PropertyResource(Resource):
         if property_data:
             parser = reqparse.RequestParser()
             parser.add_argument('name', type=str)
-            parser.add_argument('user_id', type=int)
+            parser.add_argument('owner_id', type=int)
             parser.add_argument('bedrooms', type=int)
             parser.add_argument('bathrooms', type=int)
             parser.add_argument('price', type=float)
@@ -194,7 +210,7 @@ def protected_route():
     return jsonify({'message': 'This is a protected route!'})
 
         
-api.add_resource(PropertyResource, '/properties', '/properties/<int:property_id>')
+api.add_resource(PropertyResource, '/properties', '/properties/<int:property_id>', '/properties/owner/<int:owner_id>')
 api.add_resource(Logout, '/logout')
 
 if __name__ == "__main__":

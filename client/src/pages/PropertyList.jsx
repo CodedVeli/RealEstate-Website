@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 function PropertyList( {listing, id}) {
     console.log(listing)
+    console.log(id)
   return (
     <div>
         <Link to={`/property/${id}`}>        

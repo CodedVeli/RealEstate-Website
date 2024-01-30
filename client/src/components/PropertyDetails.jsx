@@ -16,9 +16,10 @@ const PropertyDetailsPage = () => {
 
   const fetchHouses = async () => {
     try {
-      const res = await fetch("http://localhost:3000/houses");
+      const res = await fetch("http://localhost:5000/properties");
       const data = await res.json();
       setHouses(data);
+      console.log(data);
       return data;
     } catch (error) {
       console.error("Error fetching houses:", error);
@@ -62,7 +63,7 @@ const PropertyDetailsPage = () => {
                     background: `url(${url}) center no-repeat`,
                     backgroundSize: "cover",
                   }}
-                  className="h-[700px] w-[1000px]"
+                  className="h-[800px] w-full"
                   src={url}
                   alt=""
                 />
@@ -97,7 +98,7 @@ const PropertyDetailsPage = () => {
         <div className="w-[100%] h-[500px] mb-10 mt-16">
           <MapContainer
             style={{ height: "100%", width: "100%" }}
-            center={[property.geolocation.lat, property.geolocation.lng]}
+            center={[property.latitude, property.longitude]}
             zoom={13}
             scrollWheelZoom={false}
           >
@@ -107,7 +108,7 @@ const PropertyDetailsPage = () => {
             />
 
             <Marker
-              position={[property.geolocation.lat, property.geolocation.lng]}
+              position={[property.latitude, property.longitude]}
             >
               <Popup>{property.location}</Popup>
             </Marker>
