@@ -10,6 +10,7 @@ import CreateListing from "./pages/CreateListing";
 import SignUp from "./pages/SignUp";
 import LogIn from "./pages/LogIn";
 import Profile from "./pages/Profile";
+import EditListing from "./pages/EditListing";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import "./App.css";
@@ -30,6 +31,7 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<LogIn />} />
           <Route path="/profile" element={<Profile/>} />
+          <Route path="/edit/:id" element={<EditListing />} />
         </Routes>
       </Router>
     </div>

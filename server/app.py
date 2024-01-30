@@ -189,7 +189,10 @@ class PropertyResource(Resource):
 
     def delete(self, property_id):
         property_data = Property.query.filter_by(id=property_id).first()
+        property_images = Image.query.filter_by(property_id=property_id).all()
         if property_data:
+            for image in property_images:
+                db.session.delete(image)
             db.session.delete(property_data)
             db.session.commit()
             return {'message': 'Property deleted successfully'}

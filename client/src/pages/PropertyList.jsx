@@ -1,16 +1,18 @@
 import { FaLocationArrow, FaShower } from "react-icons/fa";
+import { MdOutlineDelete } from "react-icons/md";
+import { CiEdit } from "react-icons/ci";
 import { IoBed } from "react-icons/io5";
 import { Link } from "react-router-dom";
 
-function PropertyList( {listing, id}) {
+function PropertyList( {listing, id, onDelete, onEdit}) {
     console.log(listing)
     console.log(id)
   return (
-    <div>
+    <div className=" ">
         <Link to={`/property/${id}`}>        
          <div
                 
-              className="bg-white border-2 border-red-600/40 rounded-xl"
+              className="bg-white border-2 border-red-600/40 rounded-xl w-[430px]"
             >
               <img
               // remove  this after backend implementation
@@ -51,6 +53,24 @@ function PropertyList( {listing, id}) {
               </div>
             </div>
         </Link>
+      <div className=" flex flex-row justify-center  ">
+     {onEdit && (
+          <button
+            className=" bg-green-500 p-2 rounded-md mr-10"
+            onClick={() => onEdit(id)}
+          >
+            <CiEdit className=" text-white  text-xl" />
+          </button>
+        )}
+        {onDelete && (
+          <button
+            className=" bg-red-500 p-2 w-10 rounded-md"
+            onClick={() => onDelete(id)}
+          >
+            <MdOutlineDelete className=" text-white text-xl   mr-10" />
+          </button>
+        )}
+        </div>
     </div>
   )
 }
